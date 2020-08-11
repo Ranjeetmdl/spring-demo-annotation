@@ -1,2 +1,6 @@
 #ignore all files under target directory
 target/
+
+.project
+
+.classpath
