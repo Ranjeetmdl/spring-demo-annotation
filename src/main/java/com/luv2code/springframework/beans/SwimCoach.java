@@ -1,13 +1,8 @@
 package com.luv2code.springframework.beans;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-
 import com.luv2code.springframework.Coach;
 
-@Component
 public class SwimCoach implements Coach {
 	@Value("${foo.swim.name}")
 	private String name;
@@ -21,13 +16,16 @@ public class SwimCoach implements Coach {
 	@Value("${foo.swim.city}")
 	private String city;
 	
-	@Autowired
-	@Qualifier("randomFortuneService")
 	private FortuneService fortuneService;
+
+	public SwimCoach(FortuneService fortuneService) {
+		super();
+		this.fortuneService = fortuneService;
+	}
 
 	@Override
 	public String getDailyWorkOut() {
-		return "Practice backside up swimming for 15 mins";
+		return "Practice daily 1000m swimming as warm up";
 	}
 
 	@Override
@@ -35,7 +33,8 @@ public class SwimCoach implements Coach {
 		return fortuneService.getFortune();
 	}
 	
-	public void coachInfo(){
+	public void getCoachInfo(){
+		System.out.println("\nCoach Details :");
 		System.out.println("Name  :"+name);
 		System.out.println("Email  :"+email);
 		System.out.println("Team  :"+team);
